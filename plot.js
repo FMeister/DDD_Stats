@@ -40,10 +40,11 @@ setTimeout(function () {
   document.getElementById("Standardabweichung").innerText =
     "Standardabweichung: " + String(stdDev);
 
-  PLOT_AREA = document.getElementById("plotArea");
+  PLOT_AREA1 = document.getElementById("plotArea1");
+  PLOT_AREA2 = document.getElementById("plotArea2");
 
   Plotly.newPlot(
-    PLOT_AREA,
+    PLOT_AREA1,
     [
       {
         x: episode_number,
@@ -56,11 +57,36 @@ setTimeout(function () {
       },
     ],
     {
-      margin: { t: 0 },
+      margin: { t: 200 },
       showlegend: false,
       bargap: 0.2,
+      title: "Kommentare pro Episode",
       xaxis: { title: "Episoden Nummer" },
       yaxis: { title: "Kommentar Anzahl" },
+    }
+  );
+
+  Plotly.newPlot(
+    PLOT_AREA2,
+    [
+      {
+        x: comment_counts,
+        type: "histogram",
+        xbins: {
+          size: 1,
+        },
+        marker: {
+          color: "rgb(158,0,209)",
+        },
+      },
+    ],
+    {
+      margin: { t: 200 },
+      showlegend: false,
+      bargap: 0.05,
+      title: "Auftreten der Kommentar Anzahlen",
+      xaxis: { title: "Kommentar Anzahl" },
+      yaxis: { title: "Anzahl aufgetreten" },
     }
   );
 }, 1000);
